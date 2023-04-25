@@ -1,0 +1,3 @@
+#!D:\Jabir\Ml Mini proj\Ml_prj_Emotion\Django-back\myenv\Scripts\python.exe
+from numba.pycc import main
+main()
