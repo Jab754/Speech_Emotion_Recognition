@@ -63,33 +63,33 @@ def extract_feature(file_name, **kwargs):
 
     return result
 
-def record_to_file(path):
-    # "Records from the microphone and outputs the resulting data to 'path'"
-    p = pyaudio.PyAudio()
-    stream = p.open(format=FORMAT, channels=1, rate=RATE,
-                   input=True, frames_per_buffer=CHUNK_SIZE)
-    frames = []
-    silence_frames = 0
-    while True:
-        data = stream.read(CHUNK_SIZE)
-        frames.append(data)
-        if max(abs(np.frombuffer(data, dtype=np.int16))) < THRESHOLD:
-            silence_frames += 1
-        else:
-            silence_frames = 0
-        if silence_frames > SILENCE:
-            break
+# def record_to_file(path):
+#     # "Records from the microphone and outputs the resulting data to 'path'"
+#     p = pyaudio.PyAudio()
+#     stream = p.open(format=FORMAT, channels=1, rate=RATE,
+#                    input=True, frames_per_buffer=CHUNK_SIZE)
+#     frames = []
+#     silence_frames = 0
+#     while True:
+#         data = stream.read(CHUNK_SIZE)
+#         frames.append(data)
+#         if max(abs(np.frombuffer(data, dtype=np.int16))) < THRESHOLD:
+#             silence_frames += 1
+#         else:
+#             silence_frames = 0
+#         if silence_frames > SILENCE:
+#             break
 
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
+#     stream.stop_stream()
+#     stream.close()
+#     p.terminate()
 
-    wf = wave.open(path, 'wb')
-    wf.setnchannels(1)
-    wf.setsampwidth(sample_width)
-    wf.setframerate(RATE)
-    wf.writeframes(b''.join(frames))
-    wf.close()
+#     wf = wave.open(path, 'wb')
+#     wf.setnchannels(1)
+#     wf.setsampwidth(sample_width)
+#     wf.setframerate(RATE)
+#     wf.writeframes(b''.join(frames))
+#     wf.close()
 
 def save_path(path):
     wf = wave.open(path, 'wb')
@@ -121,18 +121,18 @@ def main(request):
             resullt = model.predict(features)[0]
 
             return render(request, 'main.html',{'result':resullt})
-        else:
-            file = 'recorded_audio.wav'
-            filename = os.path.join(settings.MEDIA_ROOT, file)
-            record_to_file(filename)
+        # else:
+        #     file = 'recorded_audio.wav'
+        #     filename = os.path.join(settings.MEDIA_ROOT, file)
+        #     record_to_file(filename)
 
-            model = pickle.load(open("./mlModel/mlp_classifier.model", "rb"))
+        #     model = pickle.load(open("./mlModel/mlp_classifier.model", "rb"))
 
-            features = extract_feature(filename, mfcc=True, chroma=True, mel=True).reshape(1,-1)
+        #     features = extract_feature(filename, mfcc=True, chroma=True, mel=True).reshape(1,-1)
 
-            result = model.predict(features)[0]
+        #     result = model.predict(features)[0]
 
-            return render(request, 'main.html',{'result':result})
+        #     return render(request, 'main.html',{'result':result})
 
     else:
         # Render the audio processing form

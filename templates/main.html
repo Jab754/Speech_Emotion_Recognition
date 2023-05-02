@@ -106,41 +106,42 @@
             </form>
             <br><br>
             <h2>or</h2>
-            <form method="post" id="hero1" enctype="multipart/form-data">
-              {% csrf_token %}
-              <input type="file" id="audio_file" name="audio_file" accept="audio/*">
-              <br><br>
-              
-              <input type="submit" class="btn-get-started"  style="color: #5846f9;" value="Process Audio">
-            </form>
             <br><br> -->
 
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" id="hero1" enctype="multipart/form-data">
               {% csrf_token %}
+              <input type="file" id="audio" name="audio" accept="audio/*">
+              <br><br>
+              
+              <input type="submit" class="btn-get-started"  style="color: #5846f9;" value="Upload">
+            </form>
+
+            <!-- <form method="post" enctype="multipart/form-data">
+              {% csrf_token %} -->
               <!-- <label for="audio-option"><h2>Select audio option:</h2></label> -->
-              <select id="audio-option" class="btn-get-started" style="color: #5846f9;" name="audio-option">
+              <!-- <select id="audio-option" class="btn-get-started" style="color: #5846f9;" name="audio-option">
                   <option value="record">Record audio</option>
                   <option value="upload">Upload audio</option>
               </select>
               <br><br>
-              <div id="record-audio">
+              <div id="record-audio"> -->
                   <!-- <label>Record audio:</label> -->
-                  <button type="submit" name="record" class="btn-get-started" style="color: #5846f9;" value="record">Record</button>
+                  <!-- <button type="submit" name="record" class="btn-get-started" style="color: #5846f9;" value="record">Record</button>
               </div>
-              <div id="upload-audio" style="display:none;">
+              <div id="upload-audio" style="display:none;"> -->
                   <!-- <label><h2>Upload audio:</h2></label> -->
-                  <input type="file" name="audio" accept="audio/*" >
+                  <!-- <input type="file" name="audio" accept="audio/*" >
                   <button type="submit" name="upload" class="btn-get-started" style="color: #5846f9;" value="upload">Upload</button>
               </div>
-          </form>
+          </form> -->
       
-          {% if audio_url %}
+          <!-- {% if audio_url %}
           <audio controls>
               <source src="{{ audio_url }}" type="audio/wav">
           </audio>
-          {% endif %}
+          {% endif %} -->
       
-          <script>
+          <!-- <script>
               var audioOption = document.getElementById('audio-option');
               var recordAudio = document.getElementById('record-audio');
               var uploadAudio = document.getElementById('upload-audio');
@@ -154,7 +155,7 @@
                       uploadAudio.style.display = 'block';
                   }
               });
-          </script>
+          </script> -->
    
             <!-- {% if result %}
                 <audio controls>
